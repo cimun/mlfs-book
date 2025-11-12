@@ -146,11 +146,11 @@ def process_sensor(row: pd.Series, aq_api_key: str, today: date) -> None:
 
     df_aq["pm25"] = df_aq["pm25"].astype(np.double)
     air_quality_fg.insert(df_aq)
-    air_quality_fg.update_feature_description("date", "Date of measurement of air quality")
-    air_quality_fg.update_feature_description("country", "Country (sometimes a city in aqicn.org)")
-    air_quality_fg.update_feature_description("city", "City of measurement")
-    air_quality_fg.update_feature_description("street", "Street of measurement")
-    air_quality_fg.update_feature_description("pm25", "PM2.5 (μg/m3)")
+    #air_quality_fg.update_feature_description("date", "Date of measurement of air quality")
+    #air_quality_fg.update_feature_description("country", "Country (sometimes a city in aqicn.org)")
+    #air_quality_fg.update_feature_description("city", "City of measurement")
+    #air_quality_fg.update_feature_description("street", "Street of measurement")
+    #air_quality_fg.update_feature_description("pm25", "PM2.5 (μg/m3)")
 
     weather_fg = fs.get_or_create_feature_group(
         name=weather_fg_name,
@@ -161,12 +161,12 @@ def process_sensor(row: pd.Series, aq_api_key: str, today: date) -> None:
         expectation_suite=weather_suite,
     )
     weather_fg.insert(weather_df, wait=True)
-    weather_fg.update_feature_description("date", "Date of weather measurement")
-    weather_fg.update_feature_description("city", "City for weather")
-    weather_fg.update_feature_description("temperature_2m_mean", "Temperature in Celsius")
-    weather_fg.update_feature_description("precipitation_sum", "Precipitation (mm)")
-    weather_fg.update_feature_description("wind_speed_10m_max", "Max wind speed at 10m")
-    weather_fg.update_feature_description("wind_direction_10m_dominant", "Dominant wind direction")
+    #weather_fg.update_feature_description("date", "Date of weather measurement")
+    #weather_fg.update_feature_description("city", "City for weather")
+    #weather_fg.update_feature_description("temperature_2m_mean", "Temperature in Celsius")
+    #weather_fg.update_feature_description("precipitation_sum", "Precipitation (mm)")
+    #weather_fg.update_feature_description("wind_speed_10m_max", "Max wind speed at 10m")
+    #weather_fg.update_feature_description("wind_direction_10m_dominant", "Dominant wind direction")
 
     print(f"✓ Completed: {city} / {street}")
 
