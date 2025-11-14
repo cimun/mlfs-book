@@ -2,7 +2,7 @@
 
 ## Prediction dashboard
 
-[Prediction dashboard](https://cimun.github.io/air-quality-prediction/air-quality/)
+[Prediction dashboard](https://cimun.github.io/air-quality-prediction/)
 
 ## Report
 
