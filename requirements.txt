@@ -1,6 +1,4 @@
 hopsworks[python,great-expectations]
-streamlit==1.28.2
-email-validator==2.2.0
 pydantic-settings>=2.6.1
 geopy==2.4.1
 openmeteo-requests
@@ -12,7 +10,3 @@ matplotlib==3.8.3
 plotly
 seaborn
 nbformat
-Faker
-invoke
-python-dotenv
-#feldera==0.41
