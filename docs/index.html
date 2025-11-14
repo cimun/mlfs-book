@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Air Quality Forecasts & Hindcasts</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
+    header { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+    select { padding: .5rem; font-size: 1rem; }
+    .imgs { display:grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    .card { border:1px solid #e5e7eb; border-radius: 12px; padding:1rem; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+    .card h2 { margin: 0 0 .75rem 0; font-size: 1.1rem; color:#111827; }
+    .imgwrap { display:flex; justify-content:center; align-items:center; background:#fafafa; border-radius: 8px; padding: 1rem; }
+    .imgwrap img { max-width: 100%; height: auto; }
+    footer { margin-top: 2rem; color:#6b7280; font-size:.9rem; }
+    @media (min-width: 900px) { .imgs { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0;">Air Quality: Forecast & Hindcast</h1>
+    <label for="sensor">Sensor:</label>
+    <select id="sensor"></select>
+    <span id="status" style="color:#6b7280;"></span>
+  </header>
+
+  <main class="imgs">
+    <div class="card">
+      <h2>Forecast</h2>
+      <div class="imgwrap">
+        <img id="forecast" alt="Forecast PNG" />
+      </div>
+    </div>
+    <div class="card">
+      <h2>Hindcast (1-day)</h2>
+      <div class="imgwrap">
+        <img id="hindcast" alt="Hindcast PNG" />
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Tip: images are cached—this page adds a timestamp to the URL to bust cache after updates.
+  </footer>
+
+  <script>
+    // List your sensors here (slug must match your file naming).
+    // slug = your “street_slug” (e.g., "schottenfeldgasse", "webgasse")
+    const SENSORS = [
+      { city: "vienna", street: "schottenfeldgasse", slug: "schottenfeldgasse" },
+      { city: "vienna", street: "webgasse",          slug: "webgasse" },
+      // Add more here…
+    ];
+
+    // Where PNGs live relative to this index.html
+    const BASE = "air-quality/assets/img";
+
+    const $sel = document.getElementById("sensor");
+    const $forecast = document.getElementById("forecast");
+    const $hindcast = document.getElementById("hindcast");
+    const $status = document.getElementById("status");
+
+    // Populate dropdown
+    SENSORS.forEach((s, i) => {
+      const opt = document.createElement("option");
+      opt.value = s.slug;
+      opt.textContent = `${s.city} / ${s.street}`;
+      if (i === 0) opt.selected = true;
+      $sel.appendChild(opt);
+    });
+
+    function updateImages() {
+      const slug = $sel.value;
+      // cache-busting query so you see today’s images after the pipelines run
+      const t = new Date().toISOString().slice(0,19).replace(/[-:T]/g,"");
+      const forecastPath = `${BASE}/pm25_forecast_${slug}.png?t=${t}`;
+      const hindcastPath = `${BASE}/pm25_hindcast_${slug}.png?t=${t}`;
+      $forecast.src = forecastPath;
+      $hindcast.src = hindcastPath;
+      $status.textContent = `Showing: ${slug}`;
+    }
+
+    $sel.addEventListener("change", updateImages);
+    updateImages();
+  </script>
+</body>
+</html>
