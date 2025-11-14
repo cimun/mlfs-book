@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>
+    {% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}
+  </title>
+  {% if site.theme %}
+    <!-- Let GitHub Pages / theme handle CSS -->
+  {% else %}
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
+      header { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem; }
+      nav a { margin-right: 1rem; text-decoration:none; color:#2563eb; }
+      nav a:hover { text-decoration:underline; }
+      main { max-width: 1200px; margin: 0 auto; }
+      footer { margin-top: 2rem; color:#6b7280; font-size:.9rem; }
+    </style>
+  {% endif %}
+</head>
+<body>
+  <header>
+    <div>
+      <h1 style="margin:0;">{{ site.title }}</h1>
+      {% if site.description %}
+        <p style="margin:.25rem 0 0 0; color:#6b7280;">{{ site.description }}</p>
+      {% endif %}
+    </div>
+    <nav>
+      <a href="{{ '/' | relative_url }}">Dashboard</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+    </nav>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer>
+    Built with Jekyll & GitHub Pages.
+  </footer>
+</body>
+</html>

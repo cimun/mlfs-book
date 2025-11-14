@@ -1,4 +1,12 @@
-#theme: jekyll-theme-minimal
-#title: Building ML Systems Book Dashboards
-#description: Dashboards for ML Systems built from exmaples in the O'Reilly book
-#logo: /titanic/assets/img/logo.png
+title: Air Quality Dashboard
+description: Forecast & hindcast for multiple sensors
+# For project pages (username.github.io/repo-name)
+# If this is a user/organization site, set baseurl: "" instead
+baseurl: "/air-quality-prediction"
+url: "https://cimun.github.io"
+
+theme: minima  # optional; you can remove this if you don't want theme styles
+
+# Prevent Jekyll from ignoring assets in docs/air-quality
+include:
+  - air-quality
